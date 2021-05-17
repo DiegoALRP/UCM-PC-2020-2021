@@ -1,7 +1,20 @@
 package Mensajes;
 
 /**
- * Conexion
+ * Universidad Complutense de Madrid.
+ * Programación Concurrente.
+ * Grupo A 2020-2021.
+ * Profesora:
+ * 	-Elvira María Albert Albiol.
+ * 
+ * Práctica 5
+ * 
+ * Clase Mensaje Conexion.
+ * 
+ * @author
+ * 	-Frederick Ernesto Borges Boronha.
+ * 	-Diego Alejandro Rodríguez Pereira.
+ *
  */
 public class Conexion extends Mensaje {
 
