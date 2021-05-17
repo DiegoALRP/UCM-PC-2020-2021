@@ -1,4 +1,21 @@
 package Mensajes;
+
+/**
+ * Universidad Complutense de Madrid.
+ * Programación Concurrente.
+ * Grupo A 2020-2021.
+ * Profesora:
+ * 	-Elvira María Albert Albiol.
+ * 
+ * Práctica 5
+ * 
+ * Clase Abstracta Mensaje.
+ * 
+ * @author
+ * 	-Frederick Ernesto Borges Boronha.
+ * 	-Diego Alejandro Rodríguez Pereira.
+ *
+ */
 public abstract class Mensaje{
     /*
      * Lleva informacion sobre el tipo de mensaje, origen, ...

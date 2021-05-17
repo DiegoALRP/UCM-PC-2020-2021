@@ -5,9 +5,25 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import Mensajes.Conexion;
 import Mensajes.Mensaje;
+import Mensajes.TipoMensaje;
 
+/**
+ * Universidad Complutense de Madrid.
+ * Programaci�n Concurrente.
+ * Grupo A 2020-2021.
+ * Profesora:
+ * 	-Elvira Mar�a Albert Albiol.
+ * 
+ * Pr�ctica 5
+ * 
+ * Clase Oyente Cliente.
+ * 
+ * @author
+ * 	-Frederick Ernesto Borges Boronha.
+ * 	-Diego Alejandro Rodr�guez Pereira.
+ *
+ */
 public class OyenteCliente extends Thread {
 
     private Socket socket;
