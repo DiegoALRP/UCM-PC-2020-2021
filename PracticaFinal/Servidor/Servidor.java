@@ -8,18 +8,18 @@ import Usuario.Usuario;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programaciï¿½n Concurrente.
  * Grupo A 2020-2021.
  * Profesor:
  * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Prï¿½ctica 5
  * 
  * Clase Servidor.
  * 
  * @author
  * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Diego Alejandro Rodrï¿½guez Pereira.
  *
  */
 public class Servidor extends Thread {
@@ -33,19 +33,14 @@ public class Servidor extends Thread {
      * La informacion que se va a suministrar seran ficheros de texto.
      */
 
-    public void main(String[] args) throws IOException{
-        // while (true){
-            // s = ServerSocket.accept();
-            // (new OC(s)).start();
-        //}
-
+    public void main(String[] args){
         try {
             ServerSocket socket = new ServerSocket(PUERTO);
             while (true){
 
                 System.out.println("'Servidor': Esperando por nuevas conexiones...");
                 new OyenteCliente(socket.accept()).start();
-                System.out.println("¡Se ha establecido una nueva conexion!");
+                System.out.println("Se ha establecido una nueva conexion!");
             }
         } catch (IOException e) {
             e.printStackTrace();

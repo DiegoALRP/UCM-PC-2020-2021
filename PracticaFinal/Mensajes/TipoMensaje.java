@@ -2,18 +2,18 @@ package Mensajes;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programaciï¿½n Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Marï¿½a Albert Albiol.
  * 
- * Práctica 5
+ * Prï¿½ctica 5
  * 
  * Clase Enum Tipo Mensaje.
  * 
  * @author
  * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Diego Alejandro Rodrï¿½guez Pereira.
  *
  */
 public enum TipoMensaje{
