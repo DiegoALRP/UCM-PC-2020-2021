@@ -18,19 +18,15 @@ package Mensajes;
  */
 public class PedirFichero extends Mensaje {
 
-    public PedirFichero(String origen, String destino){
-        super(origen, destino);
+	private String filename;
+	
+    public PedirFichero(String origen, String destino, String id, String filename){
+        super(origen, destino, id);
         this.tipo = TipoMensaje.PEDIR_FICHERO;
+        this.filename = filename;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-
     
+    public String getFilename() {
+    	return this.filename;
+    }
 }

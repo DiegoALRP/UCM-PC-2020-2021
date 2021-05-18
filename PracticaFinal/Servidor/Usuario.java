@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class Usuario implements Serializable {
     
 	/**************** ATRIBUTOS ****************/
-	//private static final long serialVersionUID = 1L;
 	private String idUsuario;
     private String ipUsuario;
     private int puerto;

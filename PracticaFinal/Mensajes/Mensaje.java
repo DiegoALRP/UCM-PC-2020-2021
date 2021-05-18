@@ -1,5 +1,7 @@
 package Mensajes;
 
+import java.io.Serializable;
+
 /**
  * Universidad Complutense de Madrid.
  * Programacion Concurrente.
@@ -16,7 +18,7 @@ package Mensajes;
  * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
-public abstract class Mensaje{
+public abstract class Mensaje implements Serializable{
     /*
      * Lleva informacion sobre el tipo de mensaje, origen, ...
      */
@@ -24,13 +26,28 @@ public abstract class Mensaje{
     protected TipoMensaje tipo;
     protected String origen;
     protected String destino;
+    protected String id;
+    protected String userDest;
     
-    public Mensaje (String origen, String destino){
+    public Mensaje (String origen, String destino, String id){
         this.origen = origen;
         this.destino = destino;
+        this.id = id;
     }
 
-    public abstract TipoMensaje getTipo();
-    public abstract String getOrigen();
-    public abstract String getDestino();
+    public TipoMensaje getTipo() {
+    	return this.tipo;
+    }
+    public String getOrigen() {
+    	return this.origen;
+    }
+    public String getDestino() {
+    	return this.destino;
+    }
+    public String getId() {
+    	return this.id;
+    }
+    public String getUserDest() {
+		return userDest;
+	}
 }

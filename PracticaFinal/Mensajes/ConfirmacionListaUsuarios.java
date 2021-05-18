@@ -22,19 +22,15 @@ import Servidor.Usuario;
  */
 public class ConfirmacionListaUsuarios extends Mensaje {
 
-    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> lista){
-        super(origen, destino);
+	private ArrayList<Usuario> listaUsuarios;
+	
+    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> lista, String id){
+        super(origen, destino, id);
         this.tipo = TipoMensaje.CONFIRMACION_LISTA_USUARIOS;
+        this.listaUsuarios = lista;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-
     
+    public ArrayList<Usuario> getListaUsuarios(){
+    	return this.listaUsuarios;
+    }
 }

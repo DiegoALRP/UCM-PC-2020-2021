@@ -18,19 +18,28 @@ package Mensajes;
  */
 public class PreparadoClienteServidor extends Mensaje {
 
-    public PreparadoClienteServidor(String origen, String destino){
-        super(origen, destino);
+	private String myIp;
+	private int puerto;
+	private String filename;
+	
+    public PreparadoClienteServidor(String userDest, String destino, String id, String myIp, int puerto, String filename) {
+        super(myIp, destino, id);
         this.tipo = TipoMensaje.PREPARADO_CLIENTE_SERVIDOR;
+        this.userDest = userDest;
+        this.myIp = myIp;
+        this.puerto = puerto;
+        this.filename = filename;
     }
 
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
+	public String getMyIp() {
+		return myIp;
+	}
 
-    @Override
-    public String getOrigen() { return this.origen; }
+	public int getPuerto() {
+		return puerto;
+	}
 
-    @Override
-    public String getDestino() { return this.destino; }
-
-    
+	public String getFilename() {
+		return filename;
+	}
 }

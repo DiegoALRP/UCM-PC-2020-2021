@@ -18,19 +18,21 @@ package Mensajes;
  */
 public class EmitirFichero extends Mensaje {
 
-    public EmitirFichero(String origen, String destino){
-        super(origen, destino);
+	private String filename;
+	private String ruta_fichero;
+	
+    public EmitirFichero(String origen, String destino, String id, String filename, String ruta_fichero, String userDest){
+        super(origen, destino, id);
         this.tipo = TipoMensaje.EMITIR_FICHERO;
+        this.filename = filename;
+        this.ruta_fichero = ruta_fichero;
+        this.userDest = userDest;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-
     
+    public String getFilename() {
+    	return this.filename;
+    }
+    public String getRutaFichero() {
+    	return this.ruta_fichero;
+    }
 }

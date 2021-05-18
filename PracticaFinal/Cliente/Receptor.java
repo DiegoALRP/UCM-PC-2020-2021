@@ -47,11 +47,20 @@ public class Receptor extends Thread {
 			fin = new ObjectInputStream(socket.getInputStream());
 			fout = new FileOutputStream(filename);
 			
-			//byte[] str = 
+			int count;
+			byte[] bytes = new byte[8*1024];
+			while ((count = fin.read(bytes)) > 0) {
+				fout.write(bytes, 0, count);
+			}
+			
+			fin.close();
+			fout.close();
+			socket.close();
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
     /*

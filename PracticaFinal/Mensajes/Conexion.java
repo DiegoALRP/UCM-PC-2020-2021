@@ -18,24 +18,8 @@ package Mensajes;
  */
 public class Conexion extends Mensaje {
 
-    private String nombreCliente;
-
-    public Conexion(String origen, String destino, String nombreCliente) {
-        super(origen, destino);
+    public Conexion(String origen, String destino, String id) {
+        super(origen, destino, id);
         this.tipo = TipoMensaje.CONEXION;
-        this.nombreCliente = nombreCliente;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-
-    public String getNombreCliente() { return this.nombreCliente; }
-
-    
 }

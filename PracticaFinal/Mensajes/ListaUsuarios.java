@@ -18,19 +18,8 @@ package Mensajes;
  */
 public class ListaUsuarios extends Mensaje {
 
-    public ListaUsuarios(String origen, String destino){
-        super(origen, destino);
+    public ListaUsuarios(String origen, String destino, String id){
+        super(origen, destino, id);
         this.tipo = TipoMensaje.LISTA_USUARIOS;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-
-    
 }

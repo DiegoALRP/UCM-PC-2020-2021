@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 
 import Mensajes.Mensaje;
 import Mensajes.Conexion;
@@ -35,6 +36,9 @@ public class Cliente {
     private Socket socket;
     private String nombreCliente;
     private ObjectOutputStream fout;
+    
+    private String ipServidor;
+    private Semaphore semCliente;
 
     Cliente(){};
 
@@ -82,12 +86,13 @@ public class Cliente {
         /**
          * Crear nuevo thread OyenteServidor para leer el socket
          */
-        Thread hilo = new OyenteServidor(this.socket, this.nombreCliente, variables);
-        try {
+        Thread hiloOC = new OyenteServidor(this.socket, this, semCliente, variables);
+        hiloOC.start();
+        /*try { No hace falta esperar
             hilo.join(); 
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /**
          * Enviar Mensaje Conexion
@@ -115,19 +120,21 @@ public class Cliente {
             switch (opcion) {
                 case 1:
                     // Enviar MENSAJE_LISTA_USUARIOS
-                    mensaje = new ListaUsuarios();
+                    mensaje = new ListaUsuarios(ipCliente, ipServidor, nombreCliente);
                     try { fout.writeObject(mensaje); }
                     catch (IOException e) { e.printStackTrace(); } 
                     break;
                 case 2:
                     // Enviar MENSAJE_PEDIR_FICHERO <fichero>
-                    mensaje = new PedirFichero();
+                	System.out.println("Introduce nommbre fichero: ");
+                	String filename = scanner.nextLine();
+                    mensaje = new PedirFichero(ipCliente, ipServidor, nombreCliente, filename);
                     try { fout.writeObject(mensaje); }
                     catch (IOException e) { e.printStackTrace(); } 
                     break;
                 case 3:
                     // MENSAJE_CERRAR_CONEXION
-                    mensaje = new CerrarConexion();
+                    mensaje = new CerrarConexion(ipCliente, ipServidor, nombreCliente);
                     try { fout.writeObject(mensaje); }
                     catch (IOException e) { e.printStackTrace(); }
                     break;
@@ -139,5 +146,15 @@ public class Cliente {
         scanner.close();
     }
 
+    public void enviaMensaje(Mensaje m) {
+    	
+    	try {
+			fout.writeObject(m);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public String getIpCliente() { return this.ipCliente; }
 }

@@ -18,18 +18,8 @@ package Mensajes;
  */
 public class Confirmacion extends Mensaje{
 
-    public Confirmacion(String origen, String destino){
-        super(origen, destino);
+    public Confirmacion(String origen, String destino, String id){
+        super(origen, destino, id);
         this.tipo = TipoMensaje.CONFIRMACION;
     }
-
-    @Override
-    public TipoMensaje getTipo() { return this.tipo; }
-
-    @Override
-    public String getOrigen() { return this.origen; }
-
-    @Override
-    public String getDestino() { return this.destino; }
-    
 }
