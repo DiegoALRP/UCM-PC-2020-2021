@@ -1,9 +1,5 @@
 package Usuario;
 
-<<<<<<< HEAD
-/**
- * Fichero
-=======
 import java.io.Serializable;
 
 /**
@@ -21,7 +17,6 @@ import java.io.Serializable;
  * 	-Frederick Ernesto Borges Boronha.
  * 	-Diego Alejandro Rodríguez Pereira.
  *
->>>>>>> 047f95959ab679ca2779bd15f41033e998567e45
  */
 public class Fichero implements Serializable {
 

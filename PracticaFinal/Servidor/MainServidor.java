@@ -23,11 +23,6 @@ public class MainServidor {
 	public static void main(String[] args) {
 		
 		Servidor servidor = new Servidor();
-		try {
-			servidor.main(args);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		servidor.main();
 	}
 }

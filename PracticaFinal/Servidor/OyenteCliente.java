@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import Mensajes.Conexion;
 import Mensajes.Mensaje;
 import Mensajes.TipoMensaje;
 
@@ -59,7 +60,7 @@ public class OyenteCliente extends Thread {
                 case CONEXION:
                     /*
                      * Guardar informacion del usuario (en las tablas)
-                     * Envio de mensaje confirmacion conexion fout 
+                     * Envio de mensaje confirmacion conexion fout.
                      */
                     break;
                 case LISTA_USUARIOS:

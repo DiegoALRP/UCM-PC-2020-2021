@@ -47,7 +47,7 @@ public class Receptor extends Thread {
 			fin = new ObjectInputStream(socket.getInputStream());
 			fout = new FileOutputStream(filename);
 			
-			byte[] str = 
+			//byte[] str = 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

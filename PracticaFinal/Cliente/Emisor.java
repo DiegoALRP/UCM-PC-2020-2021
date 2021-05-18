@@ -53,7 +53,8 @@ public class Emisor extends Thread {
 			Scanner sc = new Scanner(fin);
 			while (sc.hasNextLine()) {
 				
-				fout.writeBytes(sc.nextLine());
+				fout.writeChars(sc.nextLine());
+				//fout.writeBytes(sc.nextLine());
 			}
 			
 			fin.close();
