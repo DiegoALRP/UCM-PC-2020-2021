@@ -2,23 +2,24 @@ package Mensajes;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Mensaje Preparado Servidor Cliente.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class PreparadoServidorCliente extends Mensaje{
     
-    public PreparadoServidorCliente(){
+    public PreparadoServidorCliente(String origen, String destino){
+        super(origen, destino);
         this.tipo = TipoMensaje.PREPARADO_SERVIDOR_CLIENTE;
     }
 

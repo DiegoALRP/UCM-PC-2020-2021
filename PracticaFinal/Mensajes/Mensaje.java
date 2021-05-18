@@ -2,18 +2,18 @@ package Mensajes;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Abstracta Mensaje.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public abstract class Mensaje{
@@ -25,6 +25,11 @@ public abstract class Mensaje{
     protected String origen;
     protected String destino;
     
+    public Mensaje (String origen, String destino){
+        this.origen = origen;
+        this.destino = destino;
+    }
+
     public abstract TipoMensaje getTipo();
     public abstract String getOrigen();
     public abstract String getDestino();

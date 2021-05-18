@@ -2,9 +2,7 @@ package Servidor;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.ArrayList;
-
-import Usuario.Usuario;
+import java.net.Socket;
 
 /**
  * Universidad Complutense de Madrid.
@@ -23,9 +21,7 @@ import Usuario.Usuario;
  *
  */
 public class Servidor {
-
-    private int PUERTO;
-    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private int puerto = 500;
 
     public Servidor(){};
 
@@ -35,14 +31,16 @@ public class Servidor {
 
     public void main(){
         try {
-            ServerSocket socket = new ServerSocket(PUERTO);
+            ServerSocket socket = new ServerSocket(puerto);
+            AtributosServidor atributos = new AtributosServidor(socket.getInetAddress().getHostAddress(), socket.getLocalPort());
             while (true){
-
                 System.out.println("'Servidor': Esperando por nuevas conexiones...");
-                OyenteCliente oc = new OyenteCliente(socket.accept());
+                Socket s = socket.accept();
+                OyenteCliente oc = new OyenteCliente(s, atributos, s.getRemoteSocketAddress().toString());
                 oc.start();
                 System.out.println("Se ha establecido una nueva conexion!");
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

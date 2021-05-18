@@ -1,37 +1,41 @@
-package Usuario;
+package Servidor;
 
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Universidad Complutense de Madrid.
- * Programaci�n Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira Mar�a Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Pr�ctica 5
+ * Practica 5
  * 
  * Clase Usuario.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodr�guez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class Usuario implements Serializable {
     
 	/**************** ATRIBUTOS ****************/
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private String idUsuario;
     private String ipUsuario;
+    private int puerto;
+    private ObjectOutputStream fout;
+    private ObjectInputStream fin;
+    // private int puerto;
     private ArrayList<Fichero> ficheros;
 
     
     /************** CONSTRUCTORA **************/
-    public Usuario(String id, String ip) {
-
-        this.idUsuario = id;
+    public Usuario(String ip) {
         this.ipUsuario = ip;
         this.ficheros = new ArrayList<Fichero>();
     }
@@ -56,5 +60,25 @@ public class Usuario implements Serializable {
     //TODO: Revisar si es mejor pasar por referencia o por valor
     public ArrayList<Fichero> getFicheros(){
     	return this.ficheros;
+    }
+
+    public void setFin(ObjectInputStream fin) {
+        this.fin = fin;
+    }
+
+    public void setFout(ObjectOutputStream fout) {
+        this.fout = fout;
+    }
+
+    public ObjectInputStream getFin() {
+        return fin;
+    }
+
+    public ObjectOutputStream getFout() {
+        return fout;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

@@ -2,18 +2,18 @@ package Cliente;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Main Cliente.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class MainCliente {

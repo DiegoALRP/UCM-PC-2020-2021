@@ -2,23 +2,24 @@ package Mensajes;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Mensaje Confirmacion Conexion.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class ConfirmacionConexion extends Mensaje{
 
-    public ConfirmacionConexion(){
+    public ConfirmacionConexion(String origen, String destino){
+        super(origen, destino);
         this.tipo = TipoMensaje.CONFIRMAR_CONEXION;
     }
 

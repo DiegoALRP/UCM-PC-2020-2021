@@ -15,18 +15,18 @@ import Mensajes.CerrarConexion;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Cliente.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class Cliente {
@@ -92,7 +92,7 @@ public class Cliente {
         /**
          * Enviar Mensaje Conexion
          */
-        Mensaje mensaje = new Conexion();
+        Mensaje mensaje = new Conexion(this.ipCliente, variables.IPServidor, this.nombreCliente);
         try {  
             fout.writeObject(mensaje);
         }

@@ -2,24 +2,28 @@ package Mensajes;
 
 /**
  * Universidad Complutense de Madrid.
- * Programación Concurrente.
+ * Programacion Concurrente.
  * Grupo A 2020-2021.
  * Profesora:
- * 	-Elvira María Albert Albiol.
+ * 	-Elvira Maria Albert Albiol.
  * 
- * Práctica 5
+ * Practica 5
  * 
  * Clase Mensaje Conexion.
  * 
  * @author
- * 	-Frederick Ernesto Borges Boronha.
- * 	-Diego Alejandro Rodríguez Pereira.
+ * 	-Frederick Ernesto Borges Noronha.
+ * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
 public class Conexion extends Mensaje {
 
-    public Conexion(){
+    private String nombreCliente;
+
+    public Conexion(String origen, String destino, String nombreCliente) {
+        super(origen, destino);
         this.tipo = TipoMensaje.CONEXION;
+        this.nombreCliente = nombreCliente;
     }
 
     @Override
@@ -30,6 +34,8 @@ public class Conexion extends Mensaje {
 
     @Override
     public String getDestino() { return this.destino; }
+
+    public String getNombreCliente() { return this.nombreCliente; }
 
     
 }
