@@ -24,10 +24,10 @@ public class ConfirmacionListaUsuarios extends Mensaje {
 
 	private ArrayList<Usuario> listaUsuarios;
 	
-    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> lista, String id){
+    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> listaUsuarios, String id){
         super(origen, destino, id);
         this.tipo = TipoMensaje.CONFIRMACION_LISTA_USUARIOS;
-        this.listaUsuarios = lista;
+        this.listaUsuarios = listaUsuarios;
     }
     
     public ArrayList<Usuario> getListaUsuarios(){

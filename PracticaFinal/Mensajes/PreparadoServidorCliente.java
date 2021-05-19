@@ -18,8 +18,21 @@ package Mensajes;
  */
 public class PreparadoServidorCliente extends Mensaje{
     
-    public PreparadoServidorCliente(String origen, String destino, String id){
+	private String ip;
+	private int puerto;
+	
+    public PreparadoServidorCliente(String origen, String destino, String id, String ip, int puerto){
         super(origen, destino, id);
         this.tipo = TipoMensaje.PREPARADO_SERVIDOR_CLIENTE;
+        this.ip = ip;
+        this.puerto = puerto;
+    }
+    
+    public String getIp() {
+    	return this.ip;
+    }
+    
+    public int getPuerto() {
+    	return this.puerto;
     }
 }

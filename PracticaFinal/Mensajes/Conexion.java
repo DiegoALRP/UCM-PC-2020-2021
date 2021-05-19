@@ -1,5 +1,9 @@
 package Mensajes;
 
+import java.util.ArrayList;
+
+import Servidor.Fichero;
+
 /**
  * Universidad Complutense de Madrid.
  * Programacion Concurrente.
@@ -18,7 +22,7 @@ package Mensajes;
  */
 public class Conexion extends Mensaje {
 
-    public Conexion(String origen, String destino, String id) {
+    public Conexion(String origen, String destino, String id, ArrayList<Fichero> listaFicheros) {
         super(origen, destino, id);
         this.tipo = TipoMensaje.CONEXION;
     }
