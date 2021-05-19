@@ -3,6 +3,7 @@ package Servidor;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Universidad Complutense de Madrid.
@@ -65,6 +66,11 @@ public class Servidor extends Thread {
     	
     	this.listaUsuarios.deleteUsuario(id);
     	this.listaFlujosUsuarios.deleteUsuario(id);
+    }
+    
+    public ArrayList<Usuario> getListaUsuarios(){
+    	
+    	return this.listaUsuarios.getListaUsuarios();
     }
     
     public String getIp() {

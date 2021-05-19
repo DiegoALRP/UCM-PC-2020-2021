@@ -7,6 +7,7 @@ import java.net.Socket;
 
 import Mensajes.Conexion;
 import Mensajes.ConfirmacionConexion;
+import Mensajes.ConfirmacionListaUsuarios;
 import Mensajes.ErrorConexion;
 import Mensajes.Mensaje;
 
@@ -40,9 +41,11 @@ public class OyenteCliente extends Thread {
 				
 				switch (m.getTipo()) {
 				case CONEXION:
-					
+					mensajeConexion((Conexion) m);
 					break;
-
+				case LISTA_USUARIOS:
+					mensajeListaUsuarios(m);
+					break;
 				default:
 					break;
 				}
@@ -64,4 +67,9 @@ public class OyenteCliente extends Thread {
 		}
 	}
 
+	public void mensajeListaUsuarios(Mensaje m) throws IOException {
+		
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha solicitado la lista de usuarios");
+		this.fout.writeObject(new ConfirmacionListaUsuarios(this.servidor.getIp(), m.getOrigen(), this.servidor.getListaUsuarios(), m.getId()));
+	}
 }

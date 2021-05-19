@@ -24,6 +24,12 @@ public class ListaUsuarios {
 		}
 	}
 	
+	public synchronized ArrayList<Usuario> getListaUsuarios(){
+		
+		ArrayList<Usuario> copia = new ArrayList<Usuario>(this.listaUsuarios);
+		return copia;
+	}
+	
 	public synchronized Usuario getUsuario(String nombreFichero) {
 		for (Usuario user : listaUsuarios) {
 			for (Fichero fichero : user.getFicheros()) {
