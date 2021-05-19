@@ -8,6 +8,7 @@ import java.net.Socket;
 import Mensajes.AgregarFicheros;
 import Mensajes.Conexion;
 import Mensajes.ConfirmacionAgregarFicheros;
+import Mensajes.ConfirmacionCerrarConexion;
 import Mensajes.ConfirmacionConexion;
 import Mensajes.ConfirmacionListaUsuarios;
 import Mensajes.EmitirFichero;
@@ -15,6 +16,8 @@ import Mensajes.ErrorConexion;
 import Mensajes.ErrorPedirFichero;
 import Mensajes.Mensaje;
 import Mensajes.PedirFichero;
+import Mensajes.PreparadoClienteServidor;
+import Mensajes.PreparadoServidorCliente;
 
 public class OyenteCliente extends Thread {
 	
@@ -57,6 +60,12 @@ public class OyenteCliente extends Thread {
 				case PEDIR_FICHERO:
 					mensajePedirFichero((PedirFichero) m);
 					break;
+				case PREPARADO_CLIENTE_SERVIDOR:
+					mensajePreparadoClienteServidor((PreparadoClienteServidor) m);
+					break;
+				case CERRAR_CONEXION:
+					mensajeCerrarConexion(m);
+					return;
 				default:
 					break;
 				}
@@ -111,5 +120,19 @@ public class OyenteCliente extends Thread {
 			ObjectOutputStream fout_e = this.servidor.getOutPutStream(user.getIdUsuario());
 			fout_e.writeObject(new EmitirFichero(m.getDestino(), m.getOrigen(), m.getId(), m.getFilename(), rutaFichero, m.getId()));
 		}
+	}
+	
+	public void mensajePreparadoClienteServidor(PreparadoClienteServidor m) throws IOException {
+		
+		ObjectOutputStream fout_p = this.servidor.getOutPutStream(m.getId());
+		fout_p.writeObject(new PreparadoServidorCliente(m.getOrigen(), m.getDestino(), m.getId(), m.getMyIp(), m.getPuerto()));
+	}
+	
+	public void mensajeCerrarConexion(Mensaje m) throws IOException {
+		
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " se ha desconectado");
+		this.servidor.deleteUsuario(m.getId());
+		this.fout.writeObject(new ConfirmacionCerrarConexion(this.servidor.getIp(), m.getOrigen(), m.getId()));
+		this.fout.close();
 	}
 }
