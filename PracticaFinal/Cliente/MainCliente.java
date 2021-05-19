@@ -20,7 +20,17 @@ public class MainCliente {
 
     public static void main(String[] args){
 
-        Cliente cliente = new Cliente();
-        cliente.main(args);
+    	if (args.length != 3) {
+    		System.out.println("Debes de introducir: \n(1)ip del servidor \n(2)puerto del servidor \n(3)ip cliente");
+    	}
+    	else {
+    		String ipServidor = args[0];
+    		int puertoServidor = Integer.parseInt(args[1]);
+    		String ipCliente = args[2];
+    		//int numPuertos = args[3];
+    		
+    		Cliente cliente = new Cliente(ipServidor, puertoServidor, ipCliente);
+    		cliente.start();
+    	}
     }
 }

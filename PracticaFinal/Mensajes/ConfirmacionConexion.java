@@ -20,6 +20,6 @@ public class ConfirmacionConexion extends Mensaje{
 
     public ConfirmacionConexion(String origen, String destino, String id){
         super(origen, destino, id);
-        this.tipo = TipoMensaje.CONFIRMAR_CONEXION;
+        this.tipo = TipoMensaje.CONFIRMACION_CONEXION;
     }
 }

@@ -4,8 +4,10 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
+import Mensajes.Conexion;
 import Mensajes.ConfirmacionListaUsuarios;
 import Mensajes.EmitirFichero;
 import Mensajes.Mensaje;
@@ -32,14 +34,31 @@ import Servidor.Usuario;
 public class OyenteServidor extends Thread {
 
     private Socket socket;
+    private ObjectInputStream fin;
+    //private ArrayList<Semaphore> semEmisores;
+    private Semaphore semCliente;
+    private Cliente cliente;
+    private int puerto;
+    //private int puertoActual;
+    //private int puertoInicial;
+    private Scanner scanner;
+    
     private String nombreCliente;
     private Globales variables;
-    private ObjectInputStream fin;
-    private Cliente cliente;
-    private Semaphore semCliente;
 
-    OyenteServidor(Socket socket, Cliente cliente, Semaphore semCliente, Globales variables){
-        this.socket = socket;
+    public OyenteServidor(Socket socket, Cliente cliente, Semaphore semCliente, Globales variables) {
+    	
+    	try {
+    		this.socket = socket;
+			this.fin = new ObjectInputStream(this.socket.getInputStream());
+			//this.semEmisores = new ArrayList<Semaphore>();
+			this.scanner = new Scanner(System.in);
+			this.semCliente = semCliente;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.nombreCliente = nombreCliente;
         this.variables = variables;
     }
@@ -53,7 +72,10 @@ public class OyenteServidor extends Thread {
     			m = (Mensaje) fin.readObject();
     			
     			switch (m.getTipo()) {
-				case CONFIRMACION: {
+    			case ERROR_CONEXION:
+    				mensajeErrorConexion(m);
+    				break;
+				case CONFIRMACION_CONEXION: {
 					System.out.println("'OyenteServidor:' conexion con servidor establecida ");
 					//Revisar si hay que llamar al thread de cliente
 					this.semCliente.release();
@@ -105,6 +127,30 @@ public class OyenteServidor extends Thread {
         }
     }
     
+    private void mensajeErrorConexion(Mensaje m) {
+    	
+    	System.out.println("El nombre de usuario (id) ya existe en el servidor");
+    	System.out.print("Vuelva a introducir un nombre de cliente: ");
+    	cliente.setIdCLiente(this.scanner.nextLine());
+    	cliente.enviaMensaje(new Conexion(cliente.getIpCliente(), cliente.getIpServidor(), cliente.getIdCliente(), new ArrayList<Fichero>()));
+    }
+    
+    private void mensajeConfirmacionConexion(Mensaje m) {
+    	
+    	System.out.println("'OyenteServidor:' Conexion establecida");
+    	new Thread() {
+    		
+    		public void run() {
+		    	 try {
+					cliente.ComienzaMenu();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
+		     }
+    		
+    	}.start();
+    }
+    
     private void mensajeConfirmacionListaUsuarios(Mensaje m) {
     	
     	System.out.println("'OyenteServidor:' se ha recibido informacion de los usuarios");
@@ -118,7 +164,7 @@ public class OyenteServidor extends Thread {
 		this.semCliente.release();
     }
     
-    public void emitirFichero(EmitirFichero m) throws IOException {
+    private void emitirFichero(EmitirFichero m) throws IOException {
     	ServerSocket socket = new ServerSocket(0); //Con 0 busca un puerto disponible automaticamente
 		socket.setReuseAddress(true);
 		Mensaje mPreparado = new PreparadoClienteServidor(m.getUserDest(), m.getOrigen(), nombreCliente, cliente.getIpCliente(), socket.getLocalPort(), m.getFilename());

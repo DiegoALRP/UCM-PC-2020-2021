@@ -79,7 +79,7 @@ public class OyenteCliente extends Thread {
 		}
 	}
 	
-	public void mensajeConexion(Conexion m) throws IOException {
+	private void mensajeConexion(Conexion m) throws IOException {
 		
 		if (servidor.idValido(m.getId())) {
 			fout.writeObject(new ErrorConexion(this.servidor.getIp(), m.getOrigen(), "none"));
@@ -91,27 +91,27 @@ public class OyenteCliente extends Thread {
 		}
 	}
 
-	public void mensajeListaUsuarios(Mensaje m) throws IOException {
+	private void mensajeListaUsuarios(Mensaje m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha solicitado la lista de usuarios");
 		this.fout.writeObject(new ConfirmacionListaUsuarios(this.servidor.getIp(), m.getOrigen(), this.servidor.getListaUsuarios(), m.getId()));
 	}
 	
-	public void mensajeAgregarFicheros(AgregarFicheros m) throws IOException {
+	private void mensajeAgregarFicheros(AgregarFicheros m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha compartido nuevos ficheros");
 		this.servidor.agregarFicheros(m.getId(), m.getListaFicheros());
 		this.fout.writeObject(new ConfirmacionAgregarFicheros(this.servidor.getIp(), m.getOrigen(), "none"));
 	}
 	
-	public void mensajeEliminarFicheros(EliminarFicheros m) throws IOException {
+	private void mensajeEliminarFicheros(EliminarFicheros m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha dejado de compartir ficheros");
 		this.servidor.eliminarFicheros(m.getId(), m.getListaFicheros());
 		this.fout.writeObject(new ConfirmacionEliminarFicheros(this.servidor.getIp(), m.getOrigen(), m.getId()));
 	}
 	
-	public void mensajePedirFichero(PedirFichero m) throws IOException {
+	private void mensajePedirFichero(PedirFichero m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + "ha solicitdado un fichero");
 		Usuario user = this.servidor.getUsuario(m.getFilename());
@@ -133,13 +133,13 @@ public class OyenteCliente extends Thread {
 		}
 	}
 	
-	public void mensajePreparadoClienteServidor(PreparadoClienteServidor m) throws IOException {
+	private void mensajePreparadoClienteServidor(PreparadoClienteServidor m) throws IOException {
 		
 		ObjectOutputStream fout_p = this.servidor.getOutPutStream(m.getId());
 		fout_p.writeObject(new PreparadoServidorCliente(m.getOrigen(), m.getDestino(), m.getId(), m.getMyIp(), m.getPuerto()));
 	}
 	
-	public void mensajeCerrarConexion(Mensaje m) throws IOException {
+	private void mensajeCerrarConexion(Mensaje m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " se ha desconectado");
 		this.servidor.deleteUsuario(m.getId());
