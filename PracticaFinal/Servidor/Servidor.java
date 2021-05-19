@@ -73,6 +73,10 @@ public class Servidor extends Thread {
     	return this.listaUsuarios.getListaUsuarios();
     }
     
+    public void agregarFicheros(String id, ArrayList<Fichero> listaFicheros) {
+    	this.listaUsuarios.agregarFicheros(id, listaFicheros);
+    }
+    
     public String getIp() {
     	return this.ip;
     }

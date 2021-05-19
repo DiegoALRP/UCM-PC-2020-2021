@@ -5,7 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import Mensajes.AgregarFicheros;
 import Mensajes.Conexion;
+import Mensajes.ConfirmacionAgregarFicheros;
 import Mensajes.ConfirmacionConexion;
 import Mensajes.ConfirmacionListaUsuarios;
 import Mensajes.ErrorConexion;
@@ -46,6 +48,9 @@ public class OyenteCliente extends Thread {
 				case LISTA_USUARIOS:
 					mensajeListaUsuarios(m);
 					break;
+				case AGREGAR_FICHEROS:
+					mensajeAgregarFicheros((AgregarFicheros) m);
+					break;
 				default:
 					break;
 				}
@@ -71,5 +76,12 @@ public class OyenteCliente extends Thread {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha solicitado la lista de usuarios");
 		this.fout.writeObject(new ConfirmacionListaUsuarios(this.servidor.getIp(), m.getOrigen(), this.servidor.getListaUsuarios(), m.getId()));
+	}
+	
+	public void mensajeAgregarFicheros(AgregarFicheros m) throws IOException {
+		
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha compartido nuevos ficheros");
+		this.servidor.agregarFicheros(m.getId(), m.getListaFicheros());
+		this.fout.writeObject(new ConfirmacionAgregarFicheros(this.servidor.getIp(), m.getOrigen(), "none"));
 	}
 }
