@@ -1,7 +1,5 @@
 package Servidor;
 
-import java.io.IOException;
-
 /**
  * Universidad Complutense de Madrid.
  * Programacion Concurrente.

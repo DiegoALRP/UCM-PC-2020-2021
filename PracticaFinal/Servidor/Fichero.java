@@ -18,6 +18,7 @@ import java.io.Serializable;
  * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
+@SuppressWarnings("serial")
 public class Fichero implements Serializable {
 
     private String nombre;

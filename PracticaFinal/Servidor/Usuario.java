@@ -21,21 +21,19 @@ import java.util.ArrayList;
  * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
+@SuppressWarnings("serial")
 public class Usuario implements Serializable {
     
 	/**************** ATRIBUTOS ****************/
 	private String idUsuario;
     private String ipUsuario;
-    private int puerto;
-    private ObjectOutputStream fout;
-    private ObjectInputStream fin;
-    // private int puerto;
     private ArrayList<Fichero> listaFicheros;
 
     
     /************** CONSTRUCTORAS **************/
-    public Usuario(String ip) {
-        this.ipUsuario = ip;
+    public Usuario(String id, String ip) {
+    	this.idUsuario = id;
+    	this.ipUsuario = ip;
         this.listaFicheros = new ArrayList<Fichero>();
     }
     
@@ -79,28 +77,7 @@ public class Usuario implements Serializable {
     	return this.ipUsuario;
     }
     
-    //TODO: Revisar si es mejor pasar por referencia o por valor
     public ArrayList<Fichero> getFicheros(){
     	return this.listaFicheros;
-    }
-
-    public void setFin(ObjectInputStream fin) {
-        this.fin = fin;
-    }
-
-    public void setFout(ObjectOutputStream fout) {
-        this.fout = fout;
-    }
-
-    public ObjectInputStream getFin() {
-        return fin;
-    }
-
-    public ObjectOutputStream getFout() {
-        return fout;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
     }
 }
