@@ -60,7 +60,7 @@ public class OyenteCliente extends Thread {
 					mensajeAgregarFicheros((AgregarFicheros) m);
 					break;
 				case ELIMINAR_FICHEROS:
-					
+					mensajeEliminarFicheros((EliminarFicheros) m);
 				case PEDIR_FICHERO:
 					mensajePedirFichero((PedirFichero) m);
 					break;
@@ -74,8 +74,8 @@ public class OyenteCliente extends Thread {
 					break;
 				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

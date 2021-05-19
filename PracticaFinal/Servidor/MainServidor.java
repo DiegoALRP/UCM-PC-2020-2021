@@ -22,7 +22,23 @@ public class MainServidor {
 
 	public static void main(String[] args) {
 		
-		Servidor servidor = new Servidor();
-		servidor.main();
+		if (args.length != 2) {
+			
+			System.out.println("Debes de introducir la ip y el puerto del servidor");
+			System.out.println("Ejemplo: 192.192.0.21 500");
+			return;
+		}
+		
+		String ipServidor = args[0];
+		int puertoServidor = Integer.parseInt(args[1]);
+		Servidor servidor = new Servidor(ipServidor, puertoServidor);
+		servidor.start();
+		
+		try {
+			servidor.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

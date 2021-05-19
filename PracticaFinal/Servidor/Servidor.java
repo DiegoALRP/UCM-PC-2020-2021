@@ -25,32 +25,43 @@ import java.util.ArrayList;
 public class Servidor extends Thread {
 	
 	private String ip;
-    private int puerto = 500;
+    private int puerto;
     private ListaUsuarios listaUsuarios;
     private ListaFlujosUsuarios listaFlujosUsuarios;
+    private ServerSocket socket;
 
-    public Servidor(){};
+    public Servidor(String ip, int puerto) {
+    	
+    	try {
+	    	this.ip = ip;
+	    	this.puerto = puerto;
+	    	this.listaUsuarios = new ListaUsuarios();
+	    	this.listaFlujosUsuarios = new ListaFlujosUsuarios();
+			this.socket = new ServerSocket(this.puerto);
+			System.out.println("'Servidor:' servidor iniciado");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     /*
      * La informacion que se va a suministrar seran ficheros de texto.
      */
 
-    public void main(){
-        try {
-            ServerSocket socket = new ServerSocket(puerto);
-            AtributosServidor atributos = new AtributosServidor(socket.getInetAddress().getHostAddress(), socket.getLocalPort());
-            while (true){
-                System.out.println("'Servidor': Esperando por nuevas conexiones...");
-                Socket s = socket.accept();
-                //OyenteCliente oc = new OyenteCliente(s, atributos, s.getRemoteSocketAddress().toString());
-                OyenteCliente oc = new OyenteCliente(s, this);
-                oc.start();
-                System.out.println("Se ha establecido una nueva conexion!");
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void run() {
+    	
+    	while(true) {
+    		
+    		try {
+    			System.out.println("'Servidor': Esperando por nuevas conexiones...");
+				Socket socketCliente = this.socket.accept();
+				OyenteCliente oc = new OyenteCliente(socketCliente, this);
+				oc.start();
+				System.out.println("Se ha establecido una nueva conexion!");
+			} catch (IOException e) {
+				
+			}
+    	}
     }
     
     public boolean idValido(String id) {
