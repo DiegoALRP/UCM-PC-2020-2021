@@ -30,22 +30,30 @@ public class Usuario implements Serializable {
     private ObjectOutputStream fout;
     private ObjectInputStream fin;
     // private int puerto;
-    private ArrayList<Fichero> ficheros;
+    private ArrayList<Fichero> listaFicheros;
 
     
     /************** CONSTRUCTORA **************/
     public Usuario(String ip) {
         this.ipUsuario = ip;
-        this.ficheros = new ArrayList<Fichero>();
+        this.listaFicheros = new ArrayList<Fichero>();
     }
 
     
     /**************** METODOS ****************/
     public void addFichero(String nombreFichero, String rutaFichero) {
 
-        this.ficheros.add(new Fichero(nombreFichero, rutaFichero));
+        this.listaFicheros.add(new Fichero(nombreFichero, rutaFichero));
     }
     
+    public void removeFichero(String nombreFichero) {
+    	
+    	for (int i = 0; i < listaFicheros.size(); i++) {
+    		if (listaFicheros.get(i).getNombre().equalsIgnoreCase(nombreFichero)) {
+    			listaFicheros.remove(i);
+    		}
+    	}
+    }
     
     /********** GETTERS AND SETTERS **********/
     public String getIdUsuario() {
@@ -58,7 +66,7 @@ public class Usuario implements Serializable {
     
     //TODO: Revisar si es mejor pasar por referencia o por valor
     public ArrayList<Fichero> getFicheros(){
-    	return this.ficheros;
+    	return this.listaFicheros;
     }
 
     public void setFin(ObjectInputStream fin) {
