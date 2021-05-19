@@ -78,6 +78,10 @@ public class Servidor extends Thread {
     	this.listaUsuarios.agregarFicheros(id, listaFicheros);
     }
     
+    public void eliminarFicheros(String id, ArrayList<Fichero> listaFicheros) {
+    	this.listaUsuarios.eliminarFicheros(id, listaFicheros);
+    }
+    
     public Usuario getUsuario(String nombreFichero) {
     	return this.listaUsuarios.getUsuario(nombreFichero);
     }

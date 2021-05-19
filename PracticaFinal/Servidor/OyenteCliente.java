@@ -10,7 +10,9 @@ import Mensajes.Conexion;
 import Mensajes.ConfirmacionAgregarFicheros;
 import Mensajes.ConfirmacionCerrarConexion;
 import Mensajes.ConfirmacionConexion;
+import Mensajes.ConfirmacionEliminarFicheros;
 import Mensajes.ConfirmacionListaUsuarios;
+import Mensajes.EliminarFicheros;
 import Mensajes.EmitirFichero;
 import Mensajes.ErrorConexion;
 import Mensajes.ErrorPedirFichero;
@@ -57,6 +59,8 @@ public class OyenteCliente extends Thread {
 				case AGREGAR_FICHEROS:
 					mensajeAgregarFicheros((AgregarFicheros) m);
 					break;
+				case ELIMINAR_FICHEROS:
+					
 				case PEDIR_FICHERO:
 					mensajePedirFichero((PedirFichero) m);
 					break;
@@ -98,6 +102,13 @@ public class OyenteCliente extends Thread {
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha compartido nuevos ficheros");
 		this.servidor.agregarFicheros(m.getId(), m.getListaFicheros());
 		this.fout.writeObject(new ConfirmacionAgregarFicheros(this.servidor.getIp(), m.getOrigen(), "none"));
+	}
+	
+	public void mensajeEliminarFicheros(EliminarFicheros m) throws IOException {
+		
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha dejado de compartir ficheros");
+		this.servidor.eliminarFicheros(m.getId(), m.getListaFicheros());
+		this.fout.writeObject(new ConfirmacionEliminarFicheros(this.servidor.getIp(), m.getOrigen(), m.getId()));
 	}
 	
 	public void mensajePedirFichero(PedirFichero m) throws IOException {
