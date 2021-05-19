@@ -33,10 +33,25 @@ public class Usuario implements Serializable {
     private ArrayList<Fichero> listaFicheros;
 
     
-    /************** CONSTRUCTORA **************/
+    /************** CONSTRUCTORAS **************/
     public Usuario(String ip) {
         this.ipUsuario = ip;
         this.listaFicheros = new ArrayList<Fichero>();
+    }
+    
+    public Usuario(String id, String ip, ArrayList<Fichero> listaFicheros) {
+    	
+    	super();
+    	this.idUsuario = id;
+    	this.ipUsuario = ip;
+    	this.listaFicheros = new ArrayList<Fichero>(listaFicheros);
+    }
+    
+    public Usuario(Usuario usuario) {
+    	
+    	this.idUsuario = usuario.idUsuario;
+    	this.ipUsuario = usuario.ipUsuario;
+    	this.listaFicheros = new ArrayList<Fichero>(usuario.listaFicheros);
     }
 
     

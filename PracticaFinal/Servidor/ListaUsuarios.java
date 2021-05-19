@@ -7,7 +7,7 @@ public class ListaUsuarios {
 	private ArrayList<Usuario> listaUsuarios;
 	
 	public ListaUsuarios() {
-		
+		super();
 		this.listaUsuarios = new ArrayList<Usuario>();
 	}
 	

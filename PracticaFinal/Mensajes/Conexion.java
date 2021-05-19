@@ -22,8 +22,15 @@ import Servidor.Fichero;
  */
 public class Conexion extends Mensaje {
 
+	private ArrayList<Fichero> listaFicheros;
+	
     public Conexion(String origen, String destino, String id, ArrayList<Fichero> listaFicheros) {
         super(origen, destino, id);
         this.tipo = TipoMensaje.CONEXION;
+        this.listaFicheros = listaFicheros;
+    }
+    
+    public ArrayList<Fichero> getListaFicheros() {
+    	return this.listaFicheros;
     }
 }
