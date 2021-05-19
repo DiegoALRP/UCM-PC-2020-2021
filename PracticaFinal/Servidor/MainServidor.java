@@ -17,13 +17,14 @@ package Servidor;
  *
  */
 public class MainServidor {
-
+	
 	public static void main(String[] args) {
 		
+		//System.out.println("HOLA");
 		if (args.length != 2) {
 			
 			System.out.println("Debes de introducir la ip y el puerto del servidor");
-			System.out.println("Ejemplo: 192.192.0.21 500");
+			System.out.println("Ejemplo: 127.0.0.1 500");
 			return;
 		}
 		

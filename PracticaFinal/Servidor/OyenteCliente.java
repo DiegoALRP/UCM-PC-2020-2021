@@ -28,26 +28,22 @@ public class OyenteCliente extends Thread {
 	private ObjectInputStream fin;
 	private ObjectOutputStream fout;
 	
-	public OyenteCliente(Socket socket, Servidor servidor) {
+	public OyenteCliente(Socket socket, Servidor servidor) throws IOException {
 		
 		this.socket = socket;
 		this.servidor = servidor;
-		try {
-			this.fin = new ObjectInputStream(this.socket.getInputStream());
-			this.fout = new ObjectOutputStream(this.socket.getOutputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.fin = new ObjectInputStream(this.socket.getInputStream());
+		this.fout = new ObjectOutputStream(this.socket.getOutputStream());
 	}
 	
 	public void run() {
 		
 		try {
 			
-			Mensaje m = null;
+			//Mensaje m = null;
 			while (true) {
 				
-				m = (Mensaje) this.fin.readObject();
+				Mensaje m = (Mensaje) this.fin.readObject();
 				
 				switch (m.getTipo()) {
 				case CONEXION:
@@ -81,7 +77,7 @@ public class OyenteCliente extends Thread {
 	
 	private void mensajeConexion(Conexion m) throws IOException {
 		
-		if (servidor.idValido(m.getId())) {
+		if (!servidor.idValido(m.getId())) {
 			fout.writeObject(new ErrorConexion(this.servidor.getIp(), m.getOrigen(), "none"));
 		}
 		else {

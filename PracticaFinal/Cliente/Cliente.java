@@ -36,7 +36,7 @@ import Mensajes.CerrarConexion;
  * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
-public class Cliente extends Thread {
+public class Cliente {
     
     private String ipCliente;
     private String id;
@@ -50,25 +50,32 @@ public class Cliente extends Thread {
     private Socket socket;
 
     public Cliente(String ipServidor, int puertoServidor, String ipCliente) {
-		
-    	this.ipServidor = ipServidor;
-    	this.puertoServidor = puertoServidor;
-    	this.ipCliente = ipCliente;
     	
-    	this.semCliente = new Semaphore(0);
+    	try {
+    		
+    		this.ipServidor = ipServidor;
+        	this.puertoServidor = puertoServidor;
+        	this.ipCliente = ipCliente;
+        	
+        	this.semCliente = new Semaphore(0);
+			socket = new Socket(ipServidor, puertoServidor);
+			this.fout = new ObjectOutputStream(socket.getOutputStream());
+			scanner = new Scanner(System.in);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	System.out.println("'Cliente:' Se ha creado cliente");
 	}
     
     public void run() {
     	
     	try {
 			
-    		Socket socket = new Socket(ipServidor, puertoServidor);
-    		this.fout = new ObjectOutputStream(socket.getOutputStream());
-    		
-    		Scanner sc = new Scanner(System.in);
-    		System.out.println("Introduzca nombre cliente: ");
+    		System.out.print("Introduzca nombre cliente: ");
     		this.id = scanner.nextLine();
-    		while (this.id != null || this.id.isEmpty()) {
+    		while (this.id == null || this.id.isEmpty()) {
     			System.out.println("Debe introducir un nombre de usuario valido.");
     			this.id = scanner.nextLine();
     		}

@@ -55,11 +55,12 @@ public class Servidor extends Thread {
     		try {
     			System.out.println("'Servidor': Esperando por nuevas conexiones...");
 				Socket socketCliente = this.socket.accept();
-				OyenteCliente oc = new OyenteCliente(socketCliente, this);
-				oc.start();
+				//OyenteCliente oc = new OyenteCliente(socketCliente, this);
+				new OyenteCliente(socketCliente, this).start();
+				//oc.start();
 				System.out.println("Se ha establecido una nueva conexion!");
 			} catch (IOException e) {
-				
+				e.printStackTrace();
 			}
     	}
     }

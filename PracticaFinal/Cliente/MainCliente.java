@@ -22,6 +22,7 @@ public class MainCliente {
 
     	if (args.length != 3) {
     		System.out.println("Debes de introducir: \n(1)ip del servidor \n(2)puerto del servidor \n(3)ip cliente");
+    		System.out.println("Ejemplo: 127.0.0.1 500 127.0.0.1");
     	}
     	else {
     		String ipServidor = args[0];
@@ -30,7 +31,8 @@ public class MainCliente {
     		//int numPuertos = args[3];
     		
     		Cliente cliente = new Cliente(ipServidor, puertoServidor, ipCliente);
-    		cliente.start();
+    		cliente.run();
+    		//cliente.start();
     	}
     }
 }

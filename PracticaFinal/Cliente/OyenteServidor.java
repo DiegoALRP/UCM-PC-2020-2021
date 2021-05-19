@@ -76,9 +76,10 @@ public class OyenteServidor extends Thread {
     				mensajeErrorConexion(m);
     				break;
 				case CONFIRMACION_CONEXION: {
-					System.out.println("'OyenteServidor:' conexion con servidor establecida ");
+					//System.out.println("'OyenteServidor:' conexion con servidor establecida ");
 					//Revisar si hay que llamar al thread de cliente
-					this.semCliente.release();
+					//this.semCliente.release();
+					mensajeConfirmacionConexion(m);
 					break;
 				}
 				case CONFIRMACION_LISTA_USUARIOS: {
@@ -129,7 +130,7 @@ public class OyenteServidor extends Thread {
     
     private void mensajeErrorConexion(Mensaje m) {
     	
-    	System.out.println("El nombre de usuario (id) ya existe en el servidor");
+    	System.out.println("'OyenteServidor:' El nombre de usuario (id) ya existe en el servidor");
     	System.out.print("Vuelva a introducir un nombre de cliente: ");
     	cliente.setIdCLiente(this.scanner.nextLine());
     	cliente.enviaMensaje(new Conexion(cliente.getIpCliente(), cliente.getIpServidor(), cliente.getIdCliente(), new ArrayList<Fichero>()));
@@ -139,16 +140,15 @@ public class OyenteServidor extends Thread {
     	
     	System.out.println("'OyenteServidor:' Conexion establecida");
     	new Thread() {
-    		
-    		public void run() {
+		     public void run() {
 		    	 try {
 					cliente.ComienzaMenu();
 				} catch (InterruptedException | IOException e) {
 					e.printStackTrace();
 				}
 		     }
-    		
-    	}.start();
+		 }.start();
+		this.semCliente.release();
     }
     
     private void mensajeConfirmacionListaUsuarios(Mensaje m) {
