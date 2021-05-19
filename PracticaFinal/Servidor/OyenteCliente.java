@@ -10,8 +10,11 @@ import Mensajes.Conexion;
 import Mensajes.ConfirmacionAgregarFicheros;
 import Mensajes.ConfirmacionConexion;
 import Mensajes.ConfirmacionListaUsuarios;
+import Mensajes.EmitirFichero;
 import Mensajes.ErrorConexion;
+import Mensajes.ErrorPedirFichero;
 import Mensajes.Mensaje;
+import Mensajes.PedirFichero;
 
 public class OyenteCliente extends Thread {
 	
@@ -51,6 +54,9 @@ public class OyenteCliente extends Thread {
 				case AGREGAR_FICHEROS:
 					mensajeAgregarFicheros((AgregarFicheros) m);
 					break;
+				case PEDIR_FICHERO:
+					mensajePedirFichero((PedirFichero) m);
+					break;
 				default:
 					break;
 				}
@@ -83,5 +89,27 @@ public class OyenteCliente extends Thread {
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha compartido nuevos ficheros");
 		this.servidor.agregarFicheros(m.getId(), m.getListaFicheros());
 		this.fout.writeObject(new ConfirmacionAgregarFicheros(this.servidor.getIp(), m.getOrigen(), "none"));
+	}
+	
+	public void mensajePedirFichero(PedirFichero m) throws IOException {
+		
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + "ha solicitdado un fichero");
+		Usuario user = this.servidor.getUsuario(m.getFilename());
+		if (user == null) {
+			this.fout.writeObject(new ErrorPedirFichero(this.servidor.getIp(), m.getOrigen(), "none"));
+		}
+		else {
+			
+			String rutaFichero = new String();
+			for (Fichero fichero : user.getFicheros()) {
+				if (fichero.getNombre().equalsIgnoreCase(m.getFilename())) {
+					rutaFichero = fichero.getRuta();
+					break;
+				}
+			}
+			
+			ObjectOutputStream fout_e = this.servidor.getOutPutStream(user.getIdUsuario());
+			fout_e.writeObject(new EmitirFichero(m.getDestino(), m.getOrigen(), m.getId(), m.getFilename(), rutaFichero, m.getId()));
+		}
 	}
 }

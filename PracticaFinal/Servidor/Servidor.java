@@ -1,6 +1,7 @@
 package Servidor;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -75,6 +76,14 @@ public class Servidor extends Thread {
     
     public void agregarFicheros(String id, ArrayList<Fichero> listaFicheros) {
     	this.listaUsuarios.agregarFicheros(id, listaFicheros);
+    }
+    
+    public Usuario getUsuario(String nombreFichero) {
+    	return this.listaUsuarios.getUsuario(nombreFichero);
+    }
+    
+    public ObjectOutputStream getOutPutStream(String id) {
+    	return this.listaFlujosUsuarios.getOutPutStream(id);
     }
     
     public String getIp() {
