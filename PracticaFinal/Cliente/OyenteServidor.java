@@ -88,7 +88,16 @@ public class OyenteServidor extends Thread {
 				}
 				case EMITIR_FICHERO: {
 					emitirFichero((EmitirFichero) m);
+					break;
 				}
+				case ERROR_PEDIR_FICHERO:
+					System.out.println("ERROR AL PEDIR FICHERO");
+					this.semCliente.release();
+					break;
+				case CONFIRMACION_AGREGAR_FICHEROS:
+					System.out.println("'OyenteServidor:' Confirmacion Agregar Ficheros");
+					this.semCliente.release();
+					break;
 
 				default:
 					break;
@@ -139,15 +148,6 @@ public class OyenteServidor extends Thread {
     private void mensajeConfirmacionConexion(Mensaje m) {
     	
     	System.out.println("'OyenteServidor:' Conexion establecida");
-    	new Thread() {
-		     public void run() {
-		    	 try {
-					cliente.ComienzaMenu();
-				} catch (InterruptedException | IOException e) {
-					e.printStackTrace();
-				}
-		     }
-		 }.start();
 		this.semCliente.release();
     }
     
@@ -155,12 +155,23 @@ public class OyenteServidor extends Thread {
     	
     	System.out.println("'OyenteServidor:' se ha recibido informacion de los usuarios");
 		ArrayList<Usuario> listaUsuarios = ((ConfirmacionListaUsuarios) m).getListaUsuarios();
-		for (Usuario user : listaUsuarios) {
+		ArrayList<ArrayList<Fichero>> matrizFicheros = ((ConfirmacionListaUsuarios) m).getMatrizFicheros();
+		for (int i = 0; i < listaUsuarios.size(); i++) {
+			
+			System.out.println("ID Usuario: " + listaUsuarios.get(i).getIdUsuario());
+			System.out.println("    Ficheros:");
+			for (int j = 0; j < matrizFicheros.get(i).size(); j++) {
+				System.out.println("        " + (j+1) + "." + matrizFicheros.get(i).get(j).getNombre());
+			}
+		}
+		/*for (Usuario user : listaUsuarios) {
 			System.out.println("ID Usuario: " + user.getIdUsuario());
+			for (int i = 0; i < 10000; i++) {}
+			System.out.println("	Ficheros: " + );
 			for (Fichero fichero : user.getFicheros()) {
 				System.out.println(fichero.getNombre());
 			}
-		}
+		}*/
 		this.semCliente.release();
     }
     
@@ -168,7 +179,7 @@ public class OyenteServidor extends Thread {
     	ServerSocket socket = new ServerSocket(0); //Con 0 busca un puerto disponible automaticamente
 		socket.setReuseAddress(true);
 		Mensaje mPreparado = new PreparadoClienteServidor(m.getUserDest(), m.getOrigen(), nombreCliente, cliente.getIpCliente(), socket.getLocalPort(), m.getFilename());
-		cliente.enviaMensaje(m);
+		cliente.enviaMensaje(mPreparado);
 		Emisor emisor = new Emisor(socket, m.getRutaFichero(), semCliente);
 		emisor.start();
     }

@@ -90,7 +90,7 @@ public class OyenteCliente extends Thread {
 	private void mensajeListaUsuarios(Mensaje m) throws IOException {
 		
 		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha solicitado la lista de usuarios");
-		this.fout.writeObject(new ConfirmacionListaUsuarios(this.servidor.getIp(), m.getOrigen(), this.servidor.getListaUsuarios(), m.getId()));
+		this.fout.writeObject(new ConfirmacionListaUsuarios(this.servidor.getIp(), m.getOrigen(), this.servidor.getListaUsuarios(), this.servidor.getMatrizFicheros(), m.getId()));
 	}
 	
 	private void mensajeAgregarFicheros(AgregarFicheros m) throws IOException {
@@ -109,7 +109,7 @@ public class OyenteCliente extends Thread {
 	
 	private void mensajePedirFichero(PedirFichero m) throws IOException {
 		
-		System.out.println("'OyenteCliente:' el usuario " + m.getId() + "ha solicitdado un fichero");
+		System.out.println("'OyenteCliente:' el usuario " + m.getId() + " ha solicitdado un fichero");
 		Usuario user = this.servidor.getUsuario(m.getFilename());
 		if (user == null) {
 			this.fout.writeObject(new ErrorPedirFichero(this.servidor.getIp(), m.getOrigen(), "none"));

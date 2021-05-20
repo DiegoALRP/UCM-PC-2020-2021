@@ -37,4 +37,10 @@ public class Fichero implements Serializable {
     public String getRuta(){
         return this.ruta;
     }
+    
+    @Override
+    	public String toString() {
+    		
+    		return this.nombre;
+    	}
 }

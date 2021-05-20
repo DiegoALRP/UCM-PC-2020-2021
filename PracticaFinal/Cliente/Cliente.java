@@ -36,7 +36,7 @@ import Mensajes.CerrarConexion;
  * 	-Diego Alejandro Rodriguez Pereira.
  *
  */
-public class Cliente {
+public class Cliente extends Thread {
     
     private String ipCliente;
     private String id;
@@ -48,6 +48,7 @@ public class Cliente {
     
     private Scanner scanner;
     private Socket socket;
+    private boolean conexcionActiva;
 
     public Cliente(String ipServidor, int puertoServidor, String ipCliente) {
     	
@@ -61,6 +62,7 @@ public class Cliente {
 			socket = new Socket(ipServidor, puertoServidor);
 			this.fout = new ObjectOutputStream(socket.getOutputStream());
 			scanner = new Scanner(System.in);
+			this.conexcionActiva = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,9 +86,21 @@ public class Cliente {
     		this.oyenteServidor = new OyenteServidor(socket, this, semCliente, null);
     		this.oyenteServidor.start();
     		
+    		//semCliente.acquire();
     		
+    		while (this.conexcionActiva){
+    			ComienzaMenu();
+                /*System.out.println("Hola " + this.id + ", que quieres hacer?");
+                System.out.println("1. Consultar lista usuarios");
+                System.out.println("2. Pedir fichero");
+                System.out.println("3. Salir");
+                System.out.print("Tu opcion: ");
+                
+                int opcion = scanner.nextInt();
+                System.out.println(opcion);*/
+    		}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
     }
 

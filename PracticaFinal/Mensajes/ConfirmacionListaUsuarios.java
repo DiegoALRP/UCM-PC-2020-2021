@@ -2,6 +2,7 @@ package Mensajes;
 
 import java.util.ArrayList;
 
+import Servidor.Fichero;
 import Servidor.Usuario;
 
 /**
@@ -23,14 +24,20 @@ import Servidor.Usuario;
 public class ConfirmacionListaUsuarios extends Mensaje {
 
 	private ArrayList<Usuario> listaUsuarios;
+	private ArrayList<ArrayList<Fichero>> matrizFicheros;
 	
-    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> listaUsuarios, String id){
+    public ConfirmacionListaUsuarios(String origen, String destino, ArrayList<Usuario> listaUsuarios, ArrayList<ArrayList<Fichero>> matrizFicheros, String id){
         super(origen, destino, id);
         this.tipo = TipoMensaje.CONFIRMACION_LISTA_USUARIOS;
         this.listaUsuarios = listaUsuarios;
+        this.matrizFicheros = matrizFicheros;
     }
     
     public ArrayList<Usuario> getListaUsuarios(){
     	return this.listaUsuarios;
+    }
+    
+    public ArrayList<ArrayList<Fichero>> getMatrizFicheros(){
+    	return this.matrizFicheros;
     }
 }

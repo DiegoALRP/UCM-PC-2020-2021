@@ -26,8 +26,27 @@ public class ListaUsuarios {
 	
 	public synchronized ArrayList<Usuario> getListaUsuarios(){
 		
-		ArrayList<Usuario> copia = new ArrayList<Usuario>(this.listaUsuarios);
+		//ArrayList<Usuario> copia = new ArrayList<Usuario>(this.listaUsuarios);
+		ArrayList<Usuario> copia = new ArrayList<Usuario>();
+		for (int i = 0; i < this.listaUsuarios.size(); i++) {
+			copia.add(listaUsuarios.get(i));
+			System.out.println("ListaFicherosUser: " + listaUsuarios.get(i).getFicheros());
+		}
 		return copia;
+	}
+	
+	public synchronized ArrayList<ArrayList<Fichero>> getMatrizFicheros() {
+		
+		ArrayList<ArrayList<Fichero>> matrizFicheros = new ArrayList<ArrayList<Fichero>>();
+		for (int i = 0; i < this.listaUsuarios.size(); i++) {
+			ArrayList<Fichero> listaFicheros = new ArrayList<Fichero>();
+			for (int j = 0; j < this.listaUsuarios.get(i).getFicheros().size(); j++) {
+				listaFicheros.add(this.listaUsuarios.get(i).getFicheros().get(j));
+			}
+			matrizFicheros.add(listaFicheros);
+		}
+		
+		return matrizFicheros;
 	}
 	
 	public synchronized Usuario getUsuario(String nombreFichero) {

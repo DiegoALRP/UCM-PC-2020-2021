@@ -86,6 +86,11 @@ public class Servidor extends Thread {
     	return this.listaUsuarios.getListaUsuarios();
     }
     
+    public ArrayList<ArrayList<Fichero>> getMatrizFicheros() {
+    	
+    	return this.listaUsuarios.getMatrizFicheros();
+    }
+    
     public void agregarFicheros(String id, ArrayList<Fichero> listaFicheros) {
     	this.listaUsuarios.agregarFicheros(id, listaFicheros);
     }
